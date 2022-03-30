@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 893323365}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -783,7 +783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850310636}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.3, y: 2.5, z: -24.8}
+  m_LocalPosition: {x: 11.3, y: 2.5, z: 24.8}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 1575338878}
@@ -801,8 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c72982bf61c794007b6f6f425c7ca262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelLink: models/cobalt/aa00dec7-7c20-4b18-920b-820227ef0548/7800a072-d9ad-425e-9d68-e969ee8ed45c.cobalt/Cobalt?redirectBack=models
-  type: model3d
+  modelURL: https://d210ssfw4n2ihk.cloudfront.net/old-bundles/5c5a21c6-b189-450f-9d2c-08e51463d124/e729ceb7-d65b-4e7c-ac7a-f345dec6e056.meithnerium
 --- !u!114 &850310642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,6 +1538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1415899189}
+  - component: {fileID: 1415899190}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -1564,6 +1564,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1415899190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415899188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c408064ed8a4e2a89fdc8e4714966a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelInteractions:
+  - {fileID: 850310641}
 --- !u!1 &1430901718 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7970372094708222919, guid: cff71bb4dc398c3498a5966ef83e189f, type: 3}

@@ -1,36 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ModelInteraction : InteractionObject
 {
     //public string fileLocation;
     //public string assetName;
-    public string modelLink;
-    public string type;
+    //public string modelLink;
+    //public string type;
 
+    [SerializeField]private string modelURL;
+
+    private GameObject modelObject;
 
     public override void Interact()
     {
 
         base.Interact();
-        ReactHandler.CallReact(type,modelLink);
+        //ReactHandler.CallReact(type,modelLink);
 
-
-        //StartCoroutine(LoadModel(fileLocation, assetName));
     }
 
-    private IEnumerator LoadModel(string fileLocation, string assetName)
+    public IEnumerator DownloadAndLoadModel()
     {
-#if UNITY_EDITOR 
-        AssetBundleCreateRequest abcr = AssetBundle.LoadFromFileAsync(Application.dataPath + "/" + fileLocation);
-        yield return abcr.isDone;
-        GameObject g1 = abcr.assetBundle.LoadAsset<GameObject>(assetName);
-#else
-        AssetBundleCreateRequest abcr = AssetBundle.LoadFromFileAsync(fileLocation);
-        yield return abcr.isDone;
-        GameObject g1 = abcr.assetBundle.LoadAsset<GameObject>(assetName);
+        UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(modelURL);
+        yield return uwr.SendWebRequest();
+        while (!uwr.isDone)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        if (uwr.result != UnityWebRequest.Result.Success && uwr.isDone)
+        {
+            Debug.Log("DownloadFailed");
+        }
+        else
+        {
+            AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(uwr);
+            AssetBundleRequest abr = assetBundle.LoadAllAssetsAsync();
+            while (!abr.isDone)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            modelObject = Instantiate(abr.asset,this.transform) as GameObject;
+        }
 
-#endif
+
     }
 }
