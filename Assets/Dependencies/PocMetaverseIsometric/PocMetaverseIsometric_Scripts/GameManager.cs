@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
     public Action<InteractionObject> OnTriggerActor;
     public IsometricCharacterController character;
 
-   [SerializeField] private InputManager inputManager;
-   [SerializeField] private UIHandler uIHandler;
-   
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private UIHandler uIHandler;
+
     public static GameManager Instance
     {
         get
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            if(instance==null)
+            if (instance == null)
             {
                 instance = value;
             }
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance==null)
+        if (Instance == null)
         {
             Instance = this;
         }
