@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class LoadSimulationInteraction : InteractionObject
+public class LoadSimulationInteraction : InteractionZone
 {
     public string simulationLink;
     public string type;

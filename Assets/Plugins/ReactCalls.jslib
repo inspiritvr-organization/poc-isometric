@@ -6,4 +6,8 @@ mergeInto(LibraryManager.library, {
 Pointer_stringify(link)
     );
   },
+LoadingCompeleted: function () {
+    window.dispatchReactUnityEvent(
+      "LoadingCompeleted");
+  },
 });

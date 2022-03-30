@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Action<InteractionObject> OnTriggerActor;
+    public Action<InteractionZone> OnTriggerActor;
     public IsometricCharacterController character;
 
    [SerializeField] private InputManager inputManager;
@@ -30,12 +28,12 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         OnTriggerActor += WithinInteractionZone;
-        inputManager.OnMoveUpdate += MoveCharacter;
+        inputManager.OnMoveUpdate += character.Move;
     }
     private void OnDisable()
     {
         OnTriggerActor -= WithinInteractionZone;
-        inputManager.OnMoveUpdate -= MoveCharacter;
+        inputManager.OnMoveUpdate -= character.Move;
     }
 
     private void Awake()
@@ -50,15 +48,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void MoveCharacter(float x, float y)
+    private void WithinInteractionZone(InteractionZone interactionZone)
     {
-        character.Move(x, y);
-    }
-
-    private void WithinInteractionZone(InteractionObject interactionObject)
-    {
-        character.currentInteractingObject = interactionObject;
-        if (interactionObject == null)
+        character.currentIInteractionZone = interactionZone;
+        if (interactionZone == null)
         {
             uIHandler.SetStateEnterRectTransform(false);
             inputManager.OnEnterPressed -= LoadObjectBasedOnType;
@@ -71,11 +64,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public void SetInputManagerState(bool state)
+    {
+        inputManager.enabled = state;
+    }
+
+
     private void LoadObjectBasedOnType()
     {
-        if (character.currentInteractingObject != null)
+        if (character.currentIInteractionZone != null)
         {
-            character.currentInteractingObject.Interact();
+            character.currentIInteractionZone.Interact();
         }
     }
 }

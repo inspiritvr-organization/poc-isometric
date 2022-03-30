@@ -1,26 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 public class AssetLoader : MonoBehaviour
 {
-    public List<ModelInteraction> modelInteractions;
+    [SerializeField]private List<ModelDownload> modelDownloads;
 
-    [ContextMenu ("Download Models")]
     public void DownloadAssets()
     {
+        Debug.Log("Download has started");
         StartCoroutine(DownloadModels());
     }
 
-    public IEnumerator DownloadModels()
+    private IEnumerator DownloadModels()
     {
-        if (modelInteractions.Count > 0)
+        if (modelDownloads.Count > 0)
         {
-            foreach(ModelInteraction modelInteraction in modelInteractions)
+            foreach(ModelDownload modelDownload in modelDownloads)
             {
-                yield return modelInteraction.DownloadAndLoadModel();
+                yield return modelDownload.DownloadModel();
             }
         }
         yield return new WaitForEndOfFrame();
+        ReactHandler.FinishModelLoading();
+    }
+
+
+
+    [ContextMenu("Download")]
+    public void Download()
+    {
+        Debug.Log("Download has started");
+        StartCoroutine(DownloadModels());
     }
 }

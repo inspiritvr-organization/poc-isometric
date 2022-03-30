@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class InteractionObject : MonoBehaviour
+public class InteractionZone : MonoBehaviour
 {
 
     private Outline outline;

@@ -7,9 +7,8 @@ public class IsometricCharacterController : MonoBehaviour
     [Range(1.0f, 10.0f)]
     public float walkSpeed = 4f;
 
-    [HideInInspector]public InteractionObject currentInteractingObject;
+    [HideInInspector]public InteractionZone currentIInteractionZone;
     Vector3 forward, right;
-    [SerializeField]BoxCollider collider;
     RaycastHit hit;
     [Range(0,2.0f)]float slopeHeight=0.5f;
 

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class StudyGuideInteraction : InteractionObject
+public class StudyGuideInteraction : InteractionZone
 {
     [SerializeField]private string studyGuideLink;
     [SerializeField]private string type;
@@ -13,8 +11,3 @@ public class StudyGuideInteraction : InteractionObject
         ReactHandler.CallReact(type,studyGuideLink);
     }
 }
-
-
-
-/////CallStudyGuide
-///studyGuideName
