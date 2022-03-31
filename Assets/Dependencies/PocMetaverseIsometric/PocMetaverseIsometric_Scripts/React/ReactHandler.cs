@@ -4,31 +4,18 @@ using UnityEngine;
 public class ReactHandler : MonoBehaviour
 {
     [DllImport("__Internal")]
-    private static extern void CallReactLink(string type, string link);
+    private static extern void SendReactData(int index);
 
-    [DllImport("__Internal")]
-    private static extern void LoadingCompeleted();
-
-    public static void CallReact(string type,string link)
+    public static void CallReact(int index)
     {
 #if UNITY_WEBGL == true && UNITY_EDITOR == false
-        CallReactLink(type,link);
+        SendReactData(index);
 #else
-        Debug.Log("Calling" + type + "for "+ "" +
-            ""+link);
+        Debug.Log(index +"is called");
 #endif
 
     }
 
-    public static void FinishModelLoading()
-    {
-
-#if UNITY_WEBGL == true && UNITY_EDITOR == false
-        Debug.Log("LoadingCompeleted is Called");
-        LoadingCompeleted();
-#else
-        Debug.Log("Loading compeleted");
-#endif
-    }
+  
 
 }

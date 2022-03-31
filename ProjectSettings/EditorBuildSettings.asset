@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Dependencies/PocMetaverseIsometric/PocMetaverseIsometric_Scenes/IsometricRoom.unity
+    guid: 58bf92f27e3fbc3448a6c945e35c9a40
+  - enabled: 1
+    path: Assets/Dependencies/PocMetaverseIsometric/PocMetaverseIsometric_Scenes/ModelViewerAssetBundle.unity
+    guid: 7a93274225a705043a8f794cf3e5206f
   m_configObjects: {}

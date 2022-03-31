@@ -11,6 +11,8 @@ public class ModelViewerInput : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     [SerializeField] private Transform modelBase;
 
+    [SerializeField] Camera sceneCamera;
+
     private void OnEnable()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -27,7 +29,7 @@ public class ModelViewerInput : MonoBehaviour, IBeginDragHandler, IDragHandler
     {
         if (Input.GetMouseButtonDown(0))
         {
-            touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            touchStart = sceneCamera.ScreenToWorldPoint(Input.mousePosition);
         }
         if (Input.touchCount == 2)
         {
@@ -50,7 +52,7 @@ public class ModelViewerInput : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private void Zoom(float increment)
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
+        sceneCamera.orthographicSize = Mathf.Clamp(sceneCamera.orthographicSize - increment, zoomOutMin, zoomOutMax);
     }
 
     private void Rotate(Vector2 deltaRotation)
@@ -68,5 +70,9 @@ public class ModelViewerInput : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void OnBeginDrag(PointerEventData eventData)
     {
         mouseReference = eventData.position;
+    }
+    public void BackToMain()
+    {
+        GameManager.Instance.LoadScene("IsometricRoom");
     }
 }

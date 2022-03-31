@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class IsometricCharacterController : MonoBehaviour
 {
@@ -7,10 +8,10 @@ public class IsometricCharacterController : MonoBehaviour
     [Range(1.0f, 10.0f)]
     public float walkSpeed = 4f;
 
-    [HideInInspector]public InteractionZone currentIInteractionZone;
+    [HideInInspector]public GameObject currentReachableObject;
     Vector3 forward, right;
-    RaycastHit hit;
-    [Range(0,2.0f)]float slopeHeight=0.5f;
+    public Action<GameObject> NearbyObject;
+
 
     private void Start()
     {
@@ -36,7 +37,19 @@ public class IsometricCharacterController : MonoBehaviour
             transform.forward = forwardDirection;
         }
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
+        
 
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        currentReachableObject = other.gameObject;
+        IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        currentReachableObject = null;
+        IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
 
 }

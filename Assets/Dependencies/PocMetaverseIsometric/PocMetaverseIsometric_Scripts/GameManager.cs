@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Action<InteractionZone> OnTriggerActor;
-    public IsometricCharacterController character;
-
-    [SerializeField] private InputManager inputManager;
-    [SerializeField] private UIHandler uIHandler;
 
     public static GameManager Instance
     {
@@ -25,57 +20,30 @@ public class GameManager : MonoBehaviour
     }
     private static GameManager instance;
 
-    private void OnEnable()
-    {
-        OnTriggerActor += WithinInteractionZone;
-        inputManager.OnMoveUpdate += character.Move;
-    }
-    private void OnDisable()
-    {
-        OnTriggerActor -= WithinInteractionZone;
-        inputManager.OnMoveUpdate -= character.Move;
-    }
+    [SerializeField]private SceneHandler sceneHandler;
+  
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
             Destroy(this.gameObject);
         }
     }
-
-    private void WithinInteractionZone(InteractionZone interactionZone)
+    public void LoadScene(string sceneName,Action OnSceneCompeleted=null)
     {
-        character.currentIInteractionZone = interactionZone;
-        if (interactionZone == null)
-        {
-            uIHandler.SetStateEnterRectTransform(false);
-            inputManager.OnEnterPressed -= LoadObjectBasedOnType;
-        }
-        else
-        {
-            uIHandler.SetStateEnterRectTransform(true);
-            inputManager.OnEnterPressed += LoadObjectBasedOnType;
-
-        }
+        StartCoroutine(sceneHandler.LoadScene(sceneName,OnSceneCompeleted));
     }
 
 
-    public void SetInputManagerState(bool state)
+    public void LoadScene(int sceneIndex, Action OnSceneCompeleted = null)
     {
-        inputManager.enabled = state;
+        StartCoroutine(sceneHandler.LoadScene(sceneIndex, OnSceneCompeleted));
     }
 
-
-    private void LoadObjectBasedOnType()
-    {
-        if (character.currentIInteractionZone != null)
-        {
-            character.currentIInteractionZone.Interact();
-        }
-    }
 }

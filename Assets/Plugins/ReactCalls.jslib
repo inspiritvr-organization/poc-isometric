@@ -1,13 +1,7 @@
 mergeInto(LibraryManager.library, {
-  CallReactLink: function (type, link) {
+  SendReactData: function (type) {
     window.dispatchReactUnityEvent(
-      "CallReactLink",
-      Pointer_stringify(type),
-Pointer_stringify(link)
+      "SendReactData",type
     );
-  },
-LoadingCompeleted: function () {
-    window.dispatchReactUnityEvent(
-      "LoadingCompeleted");
   },
 });

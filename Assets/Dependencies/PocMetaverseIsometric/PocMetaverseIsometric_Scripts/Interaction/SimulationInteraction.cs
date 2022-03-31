@@ -1,9 +1,8 @@
-using UnityEngine;
-
-public class StudyGuideInteraction : InteractionZone
+public class SimulationInteraction : InteractionZone
 {
     public override void Interact()
     {
         base.Interact();
     }
+
 }
