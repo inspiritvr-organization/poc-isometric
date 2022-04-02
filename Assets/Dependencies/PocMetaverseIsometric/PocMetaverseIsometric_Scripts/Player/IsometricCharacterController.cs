@@ -8,7 +8,7 @@ public class IsometricCharacterController : MonoBehaviour
     [Range(1.0f, 10.0f)]
     public float walkSpeed = 4f;
 
-    [HideInInspector]public GameObject currentReachableObject;
+    [HideInInspector] public GameObject currentReachableObject;
     Vector3 forward, right;
     public Action<GameObject> NearbyObject;
 
@@ -37,17 +37,21 @@ public class IsometricCharacterController : MonoBehaviour
             transform.forward = forwardDirection;
         }
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
-        
+
 
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        other.gameObject.GetComponent<InteractionItem>()?.ShowItem(true);
+
         currentReachableObject = other.gameObject;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
     public void OnTriggerExit(Collider other)
     {
+        other.gameObject.GetComponent<InteractionItem>()?.ShowItem(false);
+
         currentReachableObject = null;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
