@@ -1,0 +1,211 @@
+{
+  "InteractionObjects": [
+    {
+      "objectID": "ac68c8e06475244a496447d93f2eb863",
+      "objectType": null,
+      "objectLabel": "Fungi",
+      "objectTransform": {
+        "position": [
+          1.46,
+          3.08,
+          5.57
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.01,
+          0.01,
+          0.01
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "9ae95a5ca47c641968d3c24a4327f1dd",
+      "objectType": null,
+      "objectLabel": "Saprotroph",
+      "objectTransform": {
+        "position": [
+          -2.23,
+          3.08,
+          12.45
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "af42dc648180942a48cd0a53913586b2",
+      "objectType": null,
+      "objectLabel": "Fungi",
+      "objectTransform": {
+        "position": [
+          2.27,
+          3.08,
+          12.45
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "d1f77c3661ff5420e851e165f271b707",
+      "objectType": null,
+      "objectLabel": "Truffles",
+      "objectTransform": {
+        "position": [
+          -5.94,
+          3.08,
+          4.16
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "06c5a4936759c47f0b69d554a1f4dbf1",
+      "objectType": null,
+      "objectLabel": "Google Slide",
+      "objectTransform": {
+        "position": [
+          6.76,
+          3.08,
+          -1.16
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "d8e237707bd5a4c569efcabc046e2fa5",
+      "objectType": null,
+      "objectLabel": "Fungi - Overview",
+      "objectTransform": {
+        "position": [
+          19.3,
+          3.08,
+          11.66
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "b975b0fad69cb45818dede62753b78d8",
+      "objectType": null,
+      "objectLabel": "Fungi - Evolution",
+      "objectTransform": {
+        "position": [
+          3.46,
+          1.04,
+          -11.51
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "19953e1ffe6e04609bd1a294940829fb",
+      "objectType": null,
+      "objectLabel": "Fungi - Uses",
+      "objectTransform": {
+        "position": [
+          14.89,
+          1.04,
+          -11.51
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    },
+    {
+      "objectID": "0d818e7281b184e11b25d973c10fb5ae",
+      "objectType": null,
+      "objectLabel": "Google Slide",
+      "objectTransform": {
+        "position": [
+          26.24,
+          3.08,
+          12.19
+        ],
+        "rotation": [
+          30.0000038,
+          45.0,
+          0.0
+        ],
+        "scale": [
+          0.005,
+          0.005,
+          0.005
+        ]
+      },
+      "objectURL": null
+    }
+  ]
+}

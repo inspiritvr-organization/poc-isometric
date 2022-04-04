@@ -8,7 +8,6 @@ public class InteractionZone : MonoBehaviour
     [SerializeField] private int reactIndex;
     private bool isWithinCharactersReach;
 
-
     private void Awake()
     {
         outline = GetComponent<Outline>();

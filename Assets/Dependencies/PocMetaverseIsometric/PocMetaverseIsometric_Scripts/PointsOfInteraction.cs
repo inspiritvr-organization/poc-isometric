@@ -2,20 +2,31 @@
 using System.Collections.Generic;
 public class ObjetTransform
 {
+    public ObjetTransform()
+    {
+        position = new List<float>();
+        rotation = new List<float>();
+        scale = new List<float>();
+    }
     public List<float> position { get; set; }
     public List<float> rotation { get; set; }
     public List<float> scale { get; set; }
 }
 
-public class InterationPoint
+public class InteractionObject
 {
-    public string id { get; set; }
+    public InteractionObject()
+    {
+        objectTransform = new ObjetTransform();
+    }
+    public string objectID { get; set; }
     public string objectType { get; set; }
-    public ObjetTransform Transform { get; set; }
-    public string URL { get; set; }
+    public string objectLabel { get; set; }
+    public ObjetTransform objectTransform { get; set; }
+    public string objectURL { get; set; }
 }
 
-public class PointsOfInteraction
+public class InteractionPoints
 {
-    public List<InterationPoint> InterationPoints { get; set; }
+    public List<InteractionObject> InteractionObjects { get; set; }
 }

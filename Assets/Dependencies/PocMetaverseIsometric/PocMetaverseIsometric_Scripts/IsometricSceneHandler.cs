@@ -1,10 +1,8 @@
 using System;
 using UnityEngine;
-
+using Newtonsoft.Json;
 public class IsometricSceneHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public Action<GameObject> OnCharactersReach;
     public IsometricCharacterController character;
     public static IsometricSceneHandler Instance
@@ -26,6 +24,7 @@ public class IsometricSceneHandler : MonoBehaviour
     [SerializeField] public InputManager inputManager;
     [SerializeField] private UIHandler uIHandler;
     [SerializeField] private GameObject interactableParent;
+    [SerializeField] private GameObject interactablePoint;
 
     private void OnEnable()
     {
@@ -52,7 +51,7 @@ public class IsometricSceneHandler : MonoBehaviour
 
     private void Start()
     {
-        interactableParent.SetActive(true);
+        EditorTest();
     }
 
     private void WithinInteractionZone(GameObject intearctionObject)
@@ -68,6 +67,32 @@ public class IsometricSceneHandler : MonoBehaviour
         }
     }
 
+    [ContextMenu("Test Spawn Interactables")]
+    public void EditorTest()
+    {
+        if (System.IO.File.Exists(Application.dataPath + "/test.json"))
+        {
+            SpawnInteractables(System.IO.File.ReadAllText(Application.dataPath + "/test.json"));
+        }
+        else
+        {
+            Debug.LogWarning("No Test json found");
+        }
+    }
+
+    public void SpawnInteractables(string jsonString)
+    {
+        InteractionPoints interactionPoints = JsonConvert.DeserializeObject<InteractionPoints>(jsonString);
+        foreach (InteractionObject interactionObject in interactionPoints.InteractionObjects)
+        {
+            GameObject interactionZone = Instantiate(interactablePoint, interactableParent.transform);
+            interactionZone.transform.position = new Vector3(interactionObject.objectTransform.position[0], interactionObject.objectTransform.position[1], interactionObject.objectTransform.position[2]);
+            interactionZone.transform.eulerAngles = new Vector3(interactionObject.objectTransform.rotation[0], interactionObject.objectTransform.rotation[1], interactionObject.objectTransform.rotation[2]);
+            interactionZone.transform.localScale = new Vector3(interactionObject.objectTransform.scale[0], interactionObject.objectTransform.scale[1], interactionObject.objectTransform.scale[2]);
+            interactionZone.transform.name = interactionObject.objectLabel;
+        }
+        interactableParent.SetActive(true);
+    }
 
     public void SetInputManagerState(bool state)
     {

@@ -7,8 +7,8 @@ public class ModelInteraction : InteractionZone
     public override void Interact()
     {
         base.Interact();
-        AssetLoader.SetDownloadURL(url);
-        GameManager.Instance.LoadScene("ModelViewerAssetBundle");
+       //AssetLoader.SetDownloadURL(url);
+        //GameManager.Instance.LoadScene("ModelViewerAssetBundle");
         //if(thisModelType==ModelType.trilib)
         //{
         //    GameManager.Instance.LoadScene("ModelViewerTrilib");
