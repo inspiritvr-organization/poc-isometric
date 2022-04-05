@@ -32,6 +32,10 @@ public class InputManager : MonoBehaviour
                 OnMoveUpdate?.Invoke(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             }
         }
+        else
+        {
+            OnMoveUpdate?.Invoke(0, 0);
+        }
 
     }
 }

@@ -49,13 +49,10 @@ public class IsometricSceneHandler : MonoBehaviour
         }
     }
 
-    //    private void Start()
-    //    {
-    //#if UNITY_EDITOR
-    //        EditorTest();
-    //#endif
-    //        //interactableParent.SetActive(true);
-    //    }
+    private void Start()
+    {
+        interactableParent.SetActive(true);
+    }
 
     private void WithinInteractionZone(GameObject intearctionObject)
     {
