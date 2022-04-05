@@ -29,12 +29,12 @@ public class IsometricSceneHandler : MonoBehaviour
     private void OnEnable()
     {
         OnCharactersReach += WithinInteractionZone;
-        inputManager.OnMoveUpdate += character.Move;
+        inputManager.OnMoveUpdate += character.GetInput;
     }
     private void OnDisable()
     {
         OnCharactersReach -= WithinInteractionZone;
-        inputManager.OnMoveUpdate -= character.Move;
+        inputManager.OnMoveUpdate -= character.GetInput;
     }
     private void Awake()
     {
@@ -49,13 +49,13 @@ public class IsometricSceneHandler : MonoBehaviour
         }
     }
 
-//    private void Start()
-//    {
-//#if UNITY_EDITOR
-//        EditorTest();
-//#endif
-//        //interactableParent.SetActive(true);
-//    }
+    //    private void Start()
+    //    {
+    //#if UNITY_EDITOR
+    //        EditorTest();
+    //#endif
+    //        //interactableParent.SetActive(true);
+    //    }
 
     private void WithinInteractionZone(GameObject intearctionObject)
     {

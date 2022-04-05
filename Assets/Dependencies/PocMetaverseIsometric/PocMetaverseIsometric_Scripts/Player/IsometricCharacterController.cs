@@ -9,50 +9,67 @@ public class IsometricCharacterController : MonoBehaviour
     public float walkSpeed = 4f;
 
     [HideInInspector] public GameObject currentReachableObject;
-    Vector3 forward, right;
+
     public Action<GameObject> NearbyObject;
-    [SerializeField] private Rigidbody selfRigidBody;
 
+    [SerializeField] private float _speed = 5;
+    [SerializeField] private float _turnSpeed = 360;
+    private Vector3 _input;
 
-    private void Start()
+    Rigidbody _rb;
+
+    private void Awake()
     {
-
-        forward = Camera.main.transform.forward;
-        forward.y = 0;
-        forward = Vector3.Normalize(forward);
-        right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
+        _rb = GetComponent<Rigidbody>();
     }
 
-    public void Move(float x, float y)
+    public void GetInput(float x, float y)
     {
-        Vector3 rightMovement = right * walkSpeed * x;
-        Vector3 upMovement = forward * walkSpeed * y;
-        Vector3 forwardDirection = Vector3.Normalize(rightMovement + upMovement);
+        _input = new Vector3(x, 0, y);
+    }
 
-        Vector3 newPosition = transform.position;
-        newPosition += rightMovement;
-        newPosition += upMovement;
+    private void Update()
+    {
+        Look();
+    }
 
-        if (x != 0 || y != 0)
-        {
-            transform.forward = forwardDirection;
-        }
-        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime);
+    private void FixedUpdate()
+    {
+        Move();
+    }
 
+    private void Look()
+    {
+        if (_input == Vector3.zero) return;
 
+        var rot = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
+    }
+
+    private void Move()
+    {
+        _rb.MovePosition(transform.position + transform.forward * _input.normalized.magnitude * _speed * Time.deltaTime);
     }
 
     public void OnTriggerEnter(Collider other)
     {
         other.gameObject.GetComponent<InteractionFocus>()?.ShowItem(true);
+
         currentReachableObject = other.gameObject;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
     public void OnTriggerExit(Collider other)
     {
         other.gameObject.GetComponent<InteractionFocus>()?.ShowItem(false);
+
         currentReachableObject = null;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
-
 }
+
+public static class Helpers
+{
+    private static Matrix4x4 _isoMatrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
+    public static Vector3 ToIso(this Vector3 input) => _isoMatrix.MultiplyPoint3x4(input);
+}
+
