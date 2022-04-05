@@ -49,13 +49,13 @@ public class IsometricSceneHandler : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-#if UNITY_EDITOR
-        EditorTest();
-#endif
-        //interactableParent.SetActive(true);
-    }
+//    private void Start()
+//    {
+//#if UNITY_EDITOR
+//        EditorTest();
+//#endif
+//        //interactableParent.SetActive(true);
+//    }
 
     private void WithinInteractionZone(GameObject intearctionObject)
     {
@@ -94,6 +94,7 @@ public class IsometricSceneHandler : MonoBehaviour
             interactionItem.transform.localScale = new Vector3(interactionObject.objectTransform.scale[0], interactionObject.objectTransform.scale[1], interactionObject.objectTransform.scale[2]);
             interactionItem.transform.name = interactionObject.objectLabel;
             interactionItem.UpdateLabelText(interactionObject.objectLabel);
+            interactionItem.UpdateThumbnail(interactionObject.objectThumbnailURL);
         }
         interactableParent.SetActive(true);
     }

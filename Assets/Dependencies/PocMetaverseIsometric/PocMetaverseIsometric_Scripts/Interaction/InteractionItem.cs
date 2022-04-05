@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class InteractionItem : MonoBehaviour
 {
@@ -15,8 +16,14 @@ public class InteractionItem : MonoBehaviour
     }
 
 
-    public void UpdateThumbnail(Sprite thumbnailSprite)
+    public void UpdateThumbnail(string thumbnailString)
     {
-        thumbnail.sprite = thumbnailSprite;
+        if(string.IsNullOrEmpty(thumbnailString))
+        {
+            DownloadThumbnail downloadThumbnail = new DownloadThumbnail(ref thumbnail, thumbnailString);
+            StartCoroutine(downloadThumbnail.Download());
+        }
     }
+
+    
 }
