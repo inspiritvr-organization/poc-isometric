@@ -24,7 +24,7 @@ public class IsometricSceneHandler : MonoBehaviour
     [SerializeField] public InputManager inputManager;
     [SerializeField] private UIHandler uIHandler;
     [SerializeField] private GameObject interactableParent;
-    [SerializeField] private GameObject interactablePoint;
+    [SerializeField] private InteractionItem interactionItemPrefab;
 
     private void OnEnable()
     {
@@ -51,7 +51,10 @@ public class IsometricSceneHandler : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         EditorTest();
+#endif
+        //interactableParent.SetActive(true);
     }
 
     private void WithinInteractionZone(GameObject intearctionObject)
@@ -85,11 +88,12 @@ public class IsometricSceneHandler : MonoBehaviour
         InteractionPoints interactionPoints = JsonConvert.DeserializeObject<InteractionPoints>(jsonString);
         foreach (InteractionObject interactionObject in interactionPoints.InteractionObjects)
         {
-            GameObject interactionZone = Instantiate(interactablePoint, interactableParent.transform);
-            interactionZone.transform.position = new Vector3(interactionObject.objectTransform.position[0], interactionObject.objectTransform.position[1], interactionObject.objectTransform.position[2]);
-            interactionZone.transform.eulerAngles = new Vector3(interactionObject.objectTransform.rotation[0], interactionObject.objectTransform.rotation[1], interactionObject.objectTransform.rotation[2]);
-            interactionZone.transform.localScale = new Vector3(interactionObject.objectTransform.scale[0], interactionObject.objectTransform.scale[1], interactionObject.objectTransform.scale[2]);
-            interactionZone.transform.name = interactionObject.objectLabel;
+            InteractionItem interactionItem = Instantiate(interactionItemPrefab, interactableParent.transform);
+            interactionItem.transform.position = new Vector3(interactionObject.objectTransform.position[0], interactionObject.objectTransform.position[1], interactionObject.objectTransform.position[2]);
+            interactionItem.transform.eulerAngles = new Vector3(interactionObject.objectTransform.rotation[0], interactionObject.objectTransform.rotation[1], interactionObject.objectTransform.rotation[2]);
+            interactionItem.transform.localScale = new Vector3(interactionObject.objectTransform.scale[0], interactionObject.objectTransform.scale[1], interactionObject.objectTransform.scale[2]);
+            interactionItem.transform.name = interactionObject.objectLabel;
+            interactionItem.UpdateLabelText(interactionObject.objectLabel);
         }
         interactableParent.SetActive(true);
     }

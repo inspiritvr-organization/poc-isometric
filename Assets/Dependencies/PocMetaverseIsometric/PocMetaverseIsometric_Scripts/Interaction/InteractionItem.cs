@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class InteractionItem : MonoBehaviour
 {
-    private const string ShowTrigger = "show";
-    private const string HideTrigger = "hide";
+    [SerializeField] private Image thumbnail;
+    [SerializeField] private TextMeshProUGUI labelText;
 
-    [SerializeField] private Animator animator;
-
-    public void ShowItem(bool show)
+    public void UpdateLabelText(string labelString)
     {
-        animator.SetTrigger(show ? ShowTrigger : HideTrigger);
+        labelText.text = labelString;
+    }
+
+
+    public void UpdateThumbnail(Sprite thumbnailSprite)
+    {
+        thumbnail.sprite = thumbnailSprite;
     }
 }

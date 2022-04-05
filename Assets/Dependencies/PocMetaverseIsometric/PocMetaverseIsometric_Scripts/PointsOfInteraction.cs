@@ -23,7 +23,7 @@ public class InteractionObject
     public string objectType { get; set; }
     public string objectLabel { get; set; }
     public ObjetTransform objectTransform { get; set; }
-    public string objectURL { get; set; }
+    public string objectThumbnailURL { get; set; }
 }
 
 public class InteractionPoints

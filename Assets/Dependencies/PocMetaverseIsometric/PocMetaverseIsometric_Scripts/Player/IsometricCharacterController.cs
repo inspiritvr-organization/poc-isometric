@@ -11,6 +11,7 @@ public class IsometricCharacterController : MonoBehaviour
     [HideInInspector] public GameObject currentReachableObject;
     Vector3 forward, right;
     public Action<GameObject> NearbyObject;
+    [SerializeField] private Rigidbody selfRigidBody;
 
 
     private void Start()
@@ -43,15 +44,13 @@ public class IsometricCharacterController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<InteractionItem>()?.ShowItem(true);
-
+        other.gameObject.GetComponent<InteractionFocus>()?.ShowItem(true);
         currentReachableObject = other.gameObject;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
     public void OnTriggerExit(Collider other)
     {
-        other.gameObject.GetComponent<InteractionItem>()?.ShowItem(false);
-
+        other.gameObject.GetComponent<InteractionFocus>()?.ShowItem(false);
         currentReachableObject = null;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
