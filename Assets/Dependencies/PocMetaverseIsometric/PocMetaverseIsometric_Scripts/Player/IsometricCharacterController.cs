@@ -53,14 +53,18 @@ public class IsometricCharacterController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<InteractionFocus>()?.ShowItem(true);
+        if (!other.gameObject.GetComponent<InteractionFocus>()) return;
+
+        other.gameObject.GetComponent<InteractionFocus>().ShowItem(true);
 
         currentReachableObject = other.gameObject;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
     }
     public void OnTriggerExit(Collider other)
     {
-        other.gameObject.GetComponent<InteractionFocus>()?.ShowItem(false);
+        if (!other.gameObject.GetComponent<InteractionFocus>()) return;
+
+        other.gameObject.GetComponent<InteractionFocus>().ShowItem(false);
 
         currentReachableObject = null;
         IsometricSceneHandler.Instance.OnCharactersReach?.Invoke(currentReachableObject);
