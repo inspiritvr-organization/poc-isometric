@@ -25,11 +25,24 @@ public class PlayerControlSwitcher : MonoBehaviour
         mCollider = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
 
-        if (!DeviceIsMobile())
-        {
-            switcherToggle.gameObject.SetActive(true);
-            switcherToggle.isOn = true;
-        }
+        clickToMoveController.OnClickMovementStarted += DisableKeyboard;
+        clickToMoveController.OnClickMovementFinished += EnableKeyboard;
+
+        // if (!DeviceIsMobile())
+        // {
+        //     switcherToggle.gameObject.SetActive(true);
+        //     switcherToggle.isOn = true;
+        // }
+    }
+
+    public void EnableKeyboard()
+    {
+        SetKeyboard(true);
+    }
+
+    public void DisableKeyboard()
+    {
+        SetKeyboard(false);
     }
 
     public void SetKeyboard(bool isActive)
@@ -39,16 +52,16 @@ public class PlayerControlSwitcher : MonoBehaviour
             mCollider.isTrigger = false;
             mRigidbody.useGravity = true;
             keyboardController.enabled = true;
-            agent.enabled = false;
-            clickToMoveController.enabled = false;
+            // agent.enabled = false;
+            // clickToMoveController.enabled = false;
         }
         else
         {
             keyboardController.enabled = false;
             mRigidbody.useGravity = false;
             mCollider.isTrigger = true;
-            agent.enabled = true;
-            clickToMoveController.enabled = true;
+            // agent.enabled = true;
+            // clickToMoveController.enabled = true;
         }
     }
 
@@ -58,5 +71,11 @@ public class PlayerControlSwitcher : MonoBehaviour
         return IsMobile();
 #endif
         return false;
+    }
+
+    private void OnDestroy()
+    {
+        clickToMoveController.OnClickMovementStarted -= EnableKeyboard;
+        clickToMoveController.OnClickMovementFinished -= DisableKeyboard;
     }
 }

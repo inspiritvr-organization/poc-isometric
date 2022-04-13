@@ -12,20 +12,20 @@ public class IsometricCharacterController : MonoBehaviour
 
     public Action<GameObject> NearbyObject;
 
-    [SerializeField] private float _speed = 5;
-    [SerializeField] private float _turnSpeed = 360;
-    private Vector3 _input;
+    [SerializeField] private float speed = 5;
+    [SerializeField] private float turnSpeed = 360;
+    private Vector3 input;
 
-    Rigidbody _rb;
+    Rigidbody mRigidbody;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        mRigidbody = GetComponent<Rigidbody>();
     }
 
     public void GetInput(float x, float y)
     {
-        _input = new Vector3(x, 0, y);
+        input = new Vector3(x, 0, y);
     }
 
     private void Update()
@@ -40,15 +40,15 @@ public class IsometricCharacterController : MonoBehaviour
 
     private void Look()
     {
-        if (_input == Vector3.zero) return;
+        if (input == Vector3.zero) return;
 
-        var rot = Quaternion.LookRotation(_input.ToIso(), Vector3.up);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, _turnSpeed * Time.deltaTime);
+        var rot = Quaternion.LookRotation(input.ToIso(), Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
     }
 
     private void Move()
     {
-        _rb.MovePosition(transform.position + transform.forward * _input.normalized.magnitude * _speed * Time.deltaTime);
+        mRigidbody.MovePosition(transform.position + transform.forward * input.normalized.magnitude * speed * Time.deltaTime);
     }
 
     public void OnTriggerEnter(Collider other)

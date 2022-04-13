@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +6,9 @@ public class PlayerClickToMove : MonoBehaviour
 {
     [SerializeField] LayerMask layerMask;
     private NavMeshAgent agent;
+
+    public event Action OnClickMovementStarted;
+    public event Action OnClickMovementFinished;
 
     private void Awake()
     {
@@ -18,6 +19,8 @@ public class PlayerClickToMove : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) || Input.touchCount == 1)
         {
+            agent.enabled = true;
+            agent.isStopped = false;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 
@@ -33,6 +36,14 @@ public class PlayerClickToMove : MonoBehaviour
 
                 agent.SetDestination(destinationPoint);
             }
+
+            OnClickMovementStarted?.Invoke();
+        }
+        if (Vector3.Distance(agent.transform.position, agent.destination) <= agent.stoppingDistance)
+        {
+            agent.isStopped = true;
+            agent.enabled = false;
+            OnClickMovementFinished?.Invoke();
         }
     }
 }
