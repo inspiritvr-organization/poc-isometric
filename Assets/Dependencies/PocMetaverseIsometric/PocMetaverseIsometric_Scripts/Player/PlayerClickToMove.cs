@@ -4,6 +4,9 @@ using UnityEngine.AI;
 
 public class PlayerClickToMove : MonoBehaviour
 {
+    private const string GroundColliderName = "GroundCollider";
+    private const string ItemColliderName = "ItemCollider";
+
     [SerializeField] LayerMask layerMask;
     private NavMeshAgent agent;
 
@@ -27,11 +30,11 @@ public class PlayerClickToMove : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo, 1000, layerMask))
             {
                 Vector3 destinationPoint = hitInfo.point;
-                if (hitInfo.collider.name == "ItemCollider")
+                if (hitInfo.collider.name == ItemColliderName)
                 {
                     RaycastHit[] hits = Physics.RaycastAll(hitInfo.collider.transform.position, Vector3.down, 10, layerMask);
 
-                    destinationPoint = Array.Find(hits, x => x.collider.name == "GroundCollider").point;
+                    destinationPoint = Array.Find(hits, x => x.collider.name == GroundColliderName).point;
                 }
 
                 agent.SetDestination(destinationPoint);
